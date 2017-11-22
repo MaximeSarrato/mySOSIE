@@ -34,11 +34,13 @@ export const fetchUser = () => async dispatch => {
 
 export const createStudent = (values, history) => async dispatch => {
   const request = await axios.post('/api/create_student', values);
+  history.push('/');
   dispatch({ type: CREATE_STUDENT, payload: request.data });
 };
 
 export const createPromotion = (values, history) => async dispatch => {
   const request = await axios.post('/api/create_promotion', values);
+  history.push('/');
   dispatch({ type: CREATE_PROMOTION, payload: request.data });
 };
 
