@@ -11,16 +11,14 @@ import {
   CLEAR_PROMOTIONS
 } from './types';
 
-const ROOT_URL = `http://localhost:3000`;
-
 export const createUser = (values, history) => async dispatch => {
-  const request = axios.post(`${ROOT_URL}/api/create_user`, values);
+  const request = axios.post('/api/create_user', values);
   history.push('/');
   dispatch({ type: CREATE_USER, payload: request });
 };
 
 export const loginUser = (values, history) => async dispatch => {
-  const request = await axios.post(`${ROOT_URL}/api/login`, values);
+  const request = await axios.post('/api/login', values);
   // @TODO Handle wrong username/password
 
   // Dispatch FETCH_USER to update the { auth } in redux
@@ -35,12 +33,12 @@ export const fetchUser = () => async dispatch => {
 };
 
 export const createStudent = (values, history) => async dispatch => {
-  const request = await axios.post(`${ROOT_URL}/api/create_student`, values);
+  const request = await axios.post('/api/create_student', values);
   dispatch({ type: CREATE_STUDENT, payload: request.data });
 };
 
 export const createPromotion = (values, history) => async dispatch => {
-  const request = await axios.post(`${ROOT_URL}/api/create_promotion`, values);
+  const request = await axios.post('api/create_promotion', values);
   dispatch({ type: CREATE_PROMOTION, payload: request.data });
 };
 
