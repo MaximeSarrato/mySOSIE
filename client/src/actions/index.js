@@ -38,7 +38,7 @@ export const createStudent = (values, history) => async dispatch => {
 };
 
 export const createPromotion = (values, history) => async dispatch => {
-  const request = await axios.post('api/create_promotion', values);
+  const request = await axios.post('/api/create_promotion', values);
   dispatch({ type: CREATE_PROMOTION, payload: request.data });
 };
 
