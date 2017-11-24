@@ -98,7 +98,7 @@ class Header extends Component {
       <nav>
         <Navbar color="faded" light expand="md">
           <NavbarBrand tag={Link} to="/">
-            <img src="isty.png" alt="Logo ISTY" />
+            <img src="isty.png" alt="Logo ISTY2" />
           </NavbarBrand>
           <NavbarToggler onClick={this.toggleNavbar} />
           <Collapse isOpen={this.state.isNavbarOpened} navbar>
