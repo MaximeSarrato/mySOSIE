@@ -48,9 +48,9 @@ class LoginForm extends Component {
           <button
             style={{ marginTop: '15px' }}
             type="submit"
-            className="btn waves-effect waves-light red darken-1"
+            className="btn btn-warning"
           >
-            Se connecter
+            Connexion
           </button>
         </form>
         <div className="center-align" style={{ marginTop: '100px' }}>
