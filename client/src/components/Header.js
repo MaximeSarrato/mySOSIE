@@ -8,14 +8,15 @@ import {
   NavbarBrand,
   Nav,
   NavItem,
-  NavLink,
   Button,
-  ButtonDropdown,
   DropdownToggle,
   DropdownMenu,
-  DropdownItem
+  DropdownItem,
+  UncontrolledDropdown,
+  ButtonGroup
 } from 'reactstrap';
 
+import CategoriesMenu from './CategoriesMenu';
 import * as actions from '../actions';
 
 class Header extends Component {
@@ -23,22 +24,14 @@ class Header extends Component {
     super(props);
 
     this.toggleNavbar = this.toggleNavbar.bind(this);
-    this.toggleDropdown = this.toggleDropdown.bind(this);
     this.state = {
-      isNavbarOpened: false,
-      dropdownOpen: false
+      isNavbarOpen: false
     };
   }
 
   toggleNavbar() {
     this.setState(prevState => ({
-      isNavbarOpened: !prevState.isNavbarOpened
-    }));
-  }
-
-  toggleDropdown() {
-    this.setState(prevState => ({
-      dropdownOpen: !prevState.dropdownOpen
+      isNavbarOpen: !prevState.isNavbarOpen
     }));
   }
 
@@ -54,63 +47,48 @@ class Header extends Component {
         );
       default:
         return (
-          <Button color="danger" href="/api/logout">
-            Déconnexion
-          </Button>
+          <UncontrolledDropdown>
+            <DropdownToggle outline color="danger" caret>
+              {this.props.auth.username}
+            </DropdownToggle>
+            <DropdownMenu>
+              <DropdownItem>Mon compte</DropdownItem>
+              <DropdownItem divider />
+              <DropdownItem href="/api/logout">Déconnexion</DropdownItem>
+            </DropdownMenu>
+          </UncontrolledDropdown>
         );
     }
   }
 
   renderCategories() {
     switch (this.props.auth) {
+      case null:
+        return;
+      case false:
+        return;
       default:
-        return (
-          <div>
-            <Button style={{ marginRight: '5px' }} color="secondary">
-              Etudiants
-            </Button>
-            <ButtonDropdown
-              isOpen={this.state.dropdownOpen}
-              toggle={this.toggleDropdown}
-              style={{ marginRight: '5px' }}
-              color="secondary"
-            >
-              <DropdownToggle caret>Promotions</DropdownToggle>
-              <DropdownMenu>
-                <DropdownItem tag={Link} to="/promotions/list">
-                  Lister
-                </DropdownItem>
-                <DropdownItem tag={Link} to="/promotions/create">
-                  Créer une promotion
-                </DropdownItem>
-              </DropdownMenu>
-            </ButtonDropdown>
-            <Button style={{ marginRight: '5px' }} color="secondary">
-              UE
-            </Button>
-          </div>
-        );
+        return <CategoriesMenu />;
     }
   }
 
   render() {
+    console.log(this.props);
     return (
-      <nav>
-        <Navbar color="faded" light expand="md">
-          <NavbarBrand tag={Link} to="/">
-            <img src="isty.png" alt="Logo ISTY2" />
-          </NavbarBrand>
-          <NavbarToggler onClick={this.toggleNavbar} />
-          <Collapse isOpen={this.state.isNavbarOpened} navbar>
-            <Nav className="ml-auto" navbar>
-              <NavItem>{this.renderCategories()}</NavItem>
-            </Nav>
-            <Nav className="ml-auto" navbar>
-              <NavItem>{this.renderAuthButtons()}</NavItem>
-            </Nav>
-          </Collapse>
-        </Navbar>
-      </nav>
+      <Navbar color="faded" light expand="md">
+        <NavbarBrand tag={Link} to="/">
+          <img src="isty.png" alt="Logo ISTY2" />
+        </NavbarBrand>
+        <NavbarToggler onClick={this.toggleNavbar} />
+        <Collapse isOpen={this.state.isNavbarOpen} navbar>
+          <Nav className="ml-auto" navbar>
+            <NavItem>{this.renderCategories()}</NavItem>
+          </Nav>
+          <Nav className="ml-auto" navbar>
+            <NavItem>{this.renderAuthButtons()}</NavItem>
+          </Nav>
+        </Collapse>
+      </Navbar>
     );
   }
 }

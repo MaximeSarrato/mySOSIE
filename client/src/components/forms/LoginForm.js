@@ -18,7 +18,7 @@ class LoginForm extends Component {
           type={field.type}
           {...field.input}
         />
-        <div className="red-text">{touched ? error : ''}</div>
+        <div className="text-danger">{touched ? error : ''}</div>
       </div>
     );
   }
@@ -31,6 +31,7 @@ class LoginForm extends Component {
     const { handleSubmit } = this.props;
     return (
       <div>
+        <h2>Connexion</h2>
         <form onSubmit={handleSubmit(this.onSubmit.bind(this))}>
           <Field
             label="Username"
@@ -53,9 +54,9 @@ class LoginForm extends Component {
             Connexion
           </button>
         </form>
-        <div className="center-align" style={{ marginTop: '100px' }}>
-          <p>Pas encore inscrit ?</p>
-          <Link to="/signup" className="waves-effect waves-light btn-large ">
+        <div className="text-center" style={{ marginTop: '100px' }}>
+          <p className="text-center">Pas encore inscrit ?</p>
+          <Link to="/signup" className="btn btn-primary btn-lg ">
             Créer mon compte
           </Link>
         </div>
