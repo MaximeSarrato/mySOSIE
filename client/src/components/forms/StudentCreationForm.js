@@ -6,10 +6,19 @@ import { createStudent } from '../../actions';
 
 class StudentCreationForm extends Component {
   renderField(field) {
+    const { meta: { touched, error } } = field;
+    const className = `form-group ${touched && error ? 'has-danger' : ''}`;
+
     return (
-      <div>
+      <div className={className}>
         <label>{field.label}</label>
-        <input type={field.type} {...field.input} />
+        <input
+          style={{ marginBottom: '15px' }}
+          className="form-control"
+          type={field.type}
+          {...field.input}
+        />
+        <div className="text-danger">{touched ? error : ''}</div>
       </div>
     );
   }
@@ -43,24 +52,38 @@ class StudentCreationForm extends Component {
             type="text"
             component={this.renderField}
           />
-          <button
-            type="submit"
-            className="btn waves-effect waves-light red darken-1"
-          >
+          <button type="submit" className="btn btn-success">
             Ajouter
           </button>
           <Link
             style={{ marginLeft: '10px' }}
-            className="btn btn-primary"
+            className="btn btn-danger"
             to="/"
           >
-            Back to index
+            Retour
           </Link>
         </form>
       </div>
     );
   }
 }
+
+function validate(values) {
+  const errors = {};
+  if (!values.lastname) {
+    errors.lastname = 'Saisissez un nom';
+  }
+  if (!values.firstname) {
+    errors.firstname = 'Saisissez un prénom';
+  }
+  if (!values.promotionName) {
+    errors.promotionName = "Saisissez le nom d'une promotion";
+  }
+
+  return errors;
+}
+
 export default reduxForm({
-  form: 'createStudentForm'
+  form: 'createStudentForm',
+  validate
 })(connect(null, { createStudent })(StudentCreationForm));

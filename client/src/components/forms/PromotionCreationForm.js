@@ -3,13 +3,23 @@ import { Field, reduxForm } from 'redux-form';
 import { Link } from 'react-router-dom';
 import { connect } from 'react-redux';
 import { createPromotion } from '../../actions';
+import SelectYear from './SelectYear';
 
 class PromotionCreationForm extends Component {
   renderField(field) {
+    const { meta: { touched, error } } = field;
+    const className = `form-group ${touched && error ? 'has-danger' : ''}`;
+
     return (
-      <div>
+      <div className={className}>
         <label>{field.label}</label>
-        <input type={field.type} {...field.input} />
+        <input
+          style={{ marginBottom: '15px' }}
+          className="form-control"
+          type={field.type}
+          {...field.input}
+        />
+        <div className="text-danger">{touched ? error : ''}</div>
       </div>
     );
   }
@@ -30,23 +40,15 @@ class PromotionCreationForm extends Component {
             type="text"
             component={this.renderField}
           />
-          <Field
-            label="Année de fin"
-            name="finishingYear"
-            type="text"
-            className="datepicker"
-            component={this.renderField}
-          />
+          <label>Année de fin</label>
+          <Field name="finishingYear" component={SelectYear} />
 
-          <button
-            type="submit"
-            className="btn waves-effect waves-light red darken-1"
-          >
+          <button type="submit" className="btn btn-success">
             Créer
           </button>
           <Link
             style={{ marginLeft: '10px' }}
-            className="btn btn-primary"
+            className="btn btn-danger"
             to="/"
           >
             Retour au menu

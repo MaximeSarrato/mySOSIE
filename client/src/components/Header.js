@@ -41,14 +41,14 @@ class Header extends Component {
         return;
       case false:
         return (
-          <Button color="danger" tag={Link} to="/login">
+          <Button size="sm" color="warning" tag={Link} to="/login">
             Se connecter
           </Button>
         );
       default:
         return (
           <UncontrolledDropdown>
-            <DropdownToggle outline color="danger" caret>
+            <DropdownToggle size="sm" outline color="danger" caret>
               {this.props.auth.username}
             </DropdownToggle>
             <DropdownMenu>
@@ -73,7 +73,6 @@ class Header extends Component {
   }
 
   render() {
-    console.log(this.props);
     return (
       <Navbar color="faded" light expand="md">
         <NavbarBrand tag={Link} to="/">

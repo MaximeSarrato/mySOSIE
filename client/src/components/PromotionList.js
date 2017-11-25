@@ -6,7 +6,7 @@ import {
   clearStudents,
   clearPromotions
 } from '../actions';
-
+import { Table } from 'reactstrap';
 import Select from 'react-select';
 import 'react-select/dist/react-select.css';
 
@@ -30,12 +30,11 @@ class PromotionList extends Component {
     if (students) {
       return students.map(student => {
         return (
-          <li className="collection-item avatar" key={student._id}>
-            <p>
-              {student.lastname} {student.firstname}
-            </p>
-            {student._id}
-          </li>
+          <tr key={student._id}>
+            <th scope="row">{student._id}</th>
+            <td>{student.lastname}</td>
+            <td>{student.firstname}</td>
+          </tr>
         );
       });
     }
@@ -91,7 +90,16 @@ class PromotionList extends Component {
           labelKey="name"
         />
         {this.props.students ? (
-          <ul className="collection">{this.renderStudents()}</ul>
+          <Table responsive hover>
+            <thead>
+              <tr>
+                <th>ID</th>
+                <th>Prénom</th>
+                <th>Nom</th>
+              </tr>
+            </thead>
+            <tbody>{this.renderStudents()}</tbody>
+          </Table>
         ) : null}
       </div>
     );

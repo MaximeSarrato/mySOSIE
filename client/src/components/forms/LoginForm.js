@@ -49,10 +49,17 @@ class LoginForm extends Component {
           <button
             style={{ marginTop: '15px' }}
             type="submit"
-            className="btn btn-warning"
+            className="btn btn-success"
           >
             Connexion
           </button>
+          <Link
+            style={{ marginLeft: '10px', marginTop: '15px' }}
+            className="btn btn-danger"
+            to="/"
+          >
+            Retour au menu
+          </Link>
         </form>
         <div className="text-center" style={{ marginTop: '100px' }}>
           <p className="text-center">Pas encore inscrit ?</p>

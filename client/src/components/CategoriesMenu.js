@@ -22,7 +22,7 @@ function CategoriesMenu() {
               Ajouter un étudiant
             </DropdownItem>
             <DropdownItem divider />
-            <DropdownItem>Another Action</DropdownItem>
+            <DropdownItem>Liste des étudiants</DropdownItem>
           </DropdownMenu>
         </UncontrolledDropdown>
 
