@@ -2,12 +2,13 @@
 
 ---
 
-This development is a personnal challenge. mySOSIE is an application that can
-handle the entire school process like managing of promotions and students
-associated, what courses they are following, etc...
+This development is a personnal challenge.\
+_mySOSIE_ is an application that can handle the entire school process like managing
+of promotions and students associated, what courses they are following, etc...
 
-At first this project was realized in my last Engineering School's year with
-Java Spring but I wanted to try to do it with Express and React.
+Mates and I already have developed SOSIE in the Architecture module during my
+last year at ISTY (IT Engineering school) with Java Spring, Maven, ...\
+Now my aim is to learn React and Express by developing mySOSIE !
 
 ---
 
@@ -19,3 +20,5 @@ Java Spring but I wanted to try to do it with Express and React.
 * **Front-end** : React
 
 ---
+
+Live demo : https://afternoon-mountain-24942.herokuapp.com/

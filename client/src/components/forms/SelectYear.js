@@ -5,6 +5,7 @@ import 'react-select/dist/react-select.css';
 // @TODO Fill the file with database entries
 const DATA = require('../../data/years');
 
+// https://ashiknesin.com/blog/use-react-select-within-redux-form/
 class SelectYear extends Component {
   onChange(event) {
     if (this.props.input.onChange && event != null) {
