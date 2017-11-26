@@ -2,6 +2,7 @@ import axios from 'axios';
 
 import {
   CREATE_USER,
+  CREATE_USER_FAILED,
   FETCH_USER,
   CREATE_STUDENT,
   CREATE_PROMOTION,
@@ -12,9 +13,13 @@ import {
 } from './types';
 
 export const createUser = (values, history) => async dispatch => {
-  const request = axios.post('/api/create_user', values);
-  history.push('/');
-  dispatch({ type: CREATE_USER, payload: request });
+  const request = await axios.post('/api/create_user', values);
+  if (request.data.error) {
+    dispatch({ type: CREATE_USER_FAILED, payload: request });
+  } else {
+    history.push('/');
+    dispatch({ type: CREATE_USER, payload: request });
+  }
 };
 
 export const loginUser = (values, history) => async dispatch => {
@@ -39,7 +44,6 @@ export const createStudent = (values, history) => async dispatch => {
 };
 
 export const createPromotion = (values, history) => async dispatch => {
-  console.log(values);
   const request = await axios.post('/api/create_promotion', values);
   history.push('/');
   dispatch({ type: CREATE_PROMOTION, payload: request.data });

@@ -1,4 +1,5 @@
 export const CREATE_USER = 'create_user';
+export const CREATE_USER_FAILED = 'create_user_failed';
 export const LOGIN_USER = 'login_user';
 export const FETCH_USER = 'fetch_user';
 export const CREATE_STUDENT = 'add_student';
