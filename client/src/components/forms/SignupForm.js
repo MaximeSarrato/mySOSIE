@@ -62,6 +62,12 @@ class SignupForm extends Component {
           type="password"
           component={this.renderField}
         />
+        <Field
+          label="Password Check"
+          name="password2"
+          type="password"
+          component={this.renderField}
+        />
         <button
           style={{ marginTop: '15px' }}
           type="submit"
@@ -88,6 +94,11 @@ function validate(values) {
   }
   if (!values.password) {
     errors.password = 'Saisissez votre mot de passe';
+  }
+  if (values.password && values.password2) {
+    if (values.password != values.password2) {
+      errors.password2 = 'Les mots de passe doivent être identiques !';
+    }
   }
 
   return errors;

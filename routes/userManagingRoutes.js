@@ -8,10 +8,12 @@ module.exports = app => {
     '/api/create_user',
     asyncWrap(async (req, res, next) => {
       const { username, password } = req.body;
+      const lowerCasedUsername = username.toLowerCase();
 
       const newManager = new Manager({
-        username: username,
-        password: password
+        username: lowerCasedUsername,
+        password: password,
+        usernameToDisplay: username
       });
 
       const existingUser = await Manager.findOne({ username });
