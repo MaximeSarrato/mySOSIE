@@ -15,7 +15,7 @@ module.exports = app => {
     });
 
     newPromotion.save().then(promo => {
-      res.send(res.send(promo));
+      res.send(promo);
     });
   });
 
