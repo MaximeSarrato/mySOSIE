@@ -46,29 +46,43 @@ class Header extends Component {
           </Button>
         );
       default:
-        return (
-          <UncontrolledDropdown>
-            <DropdownToggle size="sm" outline color="danger" caret>
-              {this.props.auth.username}
-            </DropdownToggle>
-            <DropdownMenu>
-              <DropdownItem>Mon compte</DropdownItem>
-              <DropdownItem divider />
-              <DropdownItem href="/api/logout">Déconnexion</DropdownItem>
-            </DropdownMenu>
-          </UncontrolledDropdown>
-        );
+        if (this.props.auth.error) {
+          return (
+            <Button size="sm" color="warning" tag={Link} to="/login">
+              Se connecter
+            </Button>
+          );
+        } else {
+          return (
+            <UncontrolledDropdown>
+              <DropdownToggle size="sm" outline color="danger" caret>
+                {this.props.auth.username}
+              </DropdownToggle>
+              <DropdownMenu>
+                <DropdownItem>Mon compte</DropdownItem>
+                <DropdownItem divider />
+                <DropdownItem href="/api/logout">Déconnexion</DropdownItem>
+              </DropdownMenu>
+            </UncontrolledDropdown>
+          );
+        }
     }
   }
 
   renderCategories() {
-    switch (this.props.auth) {
-      case null:
-        return;
-      case false:
-        return;
-      default:
-        return <CategoriesMenu />;
+    if (this.props.auth) {
+      if (!this.props.auth.error) {
+        switch (this.props.auth) {
+          case null:
+            return;
+          case false:
+            return;
+          default:
+            return <CategoriesMenu />;
+        }
+      }
+    } else {
+      return null;
     }
   }
 

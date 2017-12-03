@@ -4,6 +4,7 @@ import {
   CREATE_USER,
   CREATE_USER_FAILED,
   FETCH_USER,
+  FETCH_USER_FAILED,
   CREATE_STUDENT,
   CREATE_PROMOTION,
   FETCH_PROMOTIONS,
@@ -24,12 +25,12 @@ export const createUser = (values, history) => async dispatch => {
 
 export const loginUser = (values, history) => async dispatch => {
   const request = await axios.post('/api/login', values);
-  // @TODO Handle wrong username/password
-
-  // Dispatch FETCH_USER to update the { auth } in redux
-  // request.data contains the login, password and id of the user
-  history.push('/');
-  dispatch({ type: FETCH_USER, payload: request.data });
+  if (request.data.error) {
+    dispatch({ type: FETCH_USER_FAILED, payload: request.data.error });
+  } else {
+    history.push('/');
+    dispatch({ type: FETCH_USER, payload: request.data });
+  }
 };
 
 export const fetchUser = () => async dispatch => {

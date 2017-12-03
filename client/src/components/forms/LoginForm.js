@@ -23,6 +23,21 @@ class LoginForm extends Component {
     );
   }
 
+  renderSubmitError() {
+    if (this.props.auth) {
+      if (this.props.auth.error) {
+        switch (this.props.auth.error) {
+          case 'BAD_LOGIN_OR_PASSWORD':
+            return (
+              <p>Le nom d'utilisateur ou le mot de passe est incorrect.</p>
+            );
+          default:
+            return null;
+        }
+      }
+    }
+  }
+
   onSubmit(values) {
     this.props.loginUser(values, this.props.history);
   }
@@ -33,6 +48,7 @@ class LoginForm extends Component {
       <div>
         <h2>Connexion</h2>
         <form onSubmit={handleSubmit(this.onSubmit.bind(this))}>
+          <div className="text-danger">{this.renderSubmitError()}</div>
           <Field
             label="Username"
             name="username"
@@ -84,7 +100,11 @@ function validate(values) {
   return errors;
 }
 
+function mapStateToProps({ auth }) {
+  return { auth };
+}
+
 export default reduxForm({
   form: 'loginForm',
   validate
-})(connect(null, { loginUser })(LoginForm));
+})(connect(mapStateToProps, { loginUser })(LoginForm));
